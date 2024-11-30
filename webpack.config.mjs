@@ -17,7 +17,7 @@ export default (env, argv) => {
       filename: "[name].[contenthash].js",
       path: path.resolve(__dirname, "dist"),
       clean: true,
-      publicPath: "/project-coin/"
+      publicPath: "/",
     },
     resolve: {
       extensions: [".js"],
