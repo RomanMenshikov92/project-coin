@@ -2,7 +2,7 @@
 
 ## [GutHub Pages](https://romanmenshikov92.github.io/project-coin/)
 
-[![Pages build status](https://github.com/RomanMenshikov92/project-coin/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/RomanMenshikov92/project-coin/actions/workflows/pages/pages-build-deployment)
+[![Build and Deploy](https://github.com/RomanMenshikov92/project-coin/actions/workflows/web.yml/badge.svg)](https://github.com/RomanMenshikov92/project-coin/actions/workflows/web.yml)
 
 ### [Макет из Figma](https://www.figma.com/design/JUJVDoP27x18v4Eqt66SdK/Bank?node-id=9-400&node-type=frame&t=5BKsAMSdWPwgaIXU-0)
 
