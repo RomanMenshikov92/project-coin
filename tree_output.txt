@@ -1,0 +1,111 @@
+.
+├── backend/
+│   ├── node_modules/*
+│   ├── public/*
+│   ├── src/
+│   │   ├── cards.js
+│   │   ├── index.js
+│   │   └── utils.js
+│   ├── .gitignore
+│   ├── package-lock.json
+│   ├── package.json
+│   └── README.md
+├── cypress/
+│   ├── downloads
+│   ├── e2e/
+│   │   ├── 1-auth/
+│   │   │   └── auth.cy.js
+│   │   ├── 2-view-scores/
+│   │   │   ├── scores-item.cy.js
+│   │   │   └── scores-list.cy.js
+│   │   └── app.cy.js
+│   ├── fixtures/*
+│   └── support/*
+├── dist/*
+├── docs/
+│   └── Диплом JS_Advanced 2.pdf
+├── layout/*
+├── node_modules/*
+├── src/
+│   ├── assets/
+│   │   ├── fonts/*
+│   │   ├── images/*
+│   │   └── styles/
+│   │       ├── vendor
+│   │       ├── fonts.sass
+│   │       ├── mixins.sass
+│   │       ├── styles.sass
+│   │       └── vars.sass
+│   ├── favicon.ico
+│   ├── js/
+│   │   ├── api/
+│   │   │   ├── fetchATM.js
+│   │   │   ├── fetchAuth.js
+│   │   │   ├── fetchCurrency.js
+│   │   │   └── fetchScore.js
+│   │   ├── components/
+│   │   │   ├── AuthForm.js
+│   │   │   ├── CurrencyExchange.js
+│   │   │   ├── CurrencyRate.js
+│   │   │   ├── CurrencyYours.js
+│   │   │   ├── Error.js
+│   │   │   ├── Header.js
+│   │   │   ├── Icons.js
+│   │   │   ├── Loader.js
+│   │   │   ├── Logo.js
+│   │   │   ├── Main.js
+│   │   │   ├── MapContainer.js
+│   │   │   ├── Nav.js
+│   │   │   ├── ScoreBtn.js
+│   │   │   ├── ScoreItemBtn.js
+│   │   │   ├── ScoreItemChart.js
+│   │   │   ├── ScoreItemNumberBalance.js
+│   │   │   ├── ScoreItemStory.js
+│   │   │   ├── ScoreItemTranslation.js
+│   │   │   ├── ScoreList.js
+│   │   │   └── ScoreSelect.js
+│   │   ├── config/
+│   │   │   ├── configCache.js
+│   │   │   ├── configRouter.js
+│   │   │   └── configSkeletonItem.js
+│   │   ├── data/
+│   │   │   ├── atmMarks.js
+│   │   │   └── vars.js
+│   │   ├── functions/
+│   │   │   └── validateAuthTest.js
+│   │   ├── pages/
+│   │   │   ├── pageATMMap.js
+│   │   │   ├── pageAuth.js
+│   │   │   ├── pageCurrency.js
+│   │   │   ├── pageNotFound.js
+│   │   │   ├── pageScoreHistory.js
+│   │   │   ├── pageScoreItem.js
+│   │   │   └── pageScoreList.js
+│   │   ├── utils/
+│   │   │   ├── dragAndDrop.js
+│   │   │   └── yamap.js
+│   │   └── app.js
+│   ├── index.html
+│   └── index.js
+├── test/
+│   ├── api/
+│   │   └── fetchAuth.test.js
+│   ├── components/
+│   │   └── AuthForm.test.js
+│   ├── pages/
+│   │   └── PageAuth.test.js
+│   └── app.test.ts
+├── .editorconfig
+├── .env
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── babel.config.json
+├── cypress.config.js
+├── eslint.config.js
+├── jest-preset.js
+├── package-lock.json
+├── package.json
+├── README.md
+├── tree_output.txt
+└── webpack.config.js

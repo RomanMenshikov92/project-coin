@@ -1,0 +1,1731 @@
+@import './vars.sass'
+@import './fonts.sass'
+@import './mixins.sass'
+
+*,
+*::before,
+*::after
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+  // outline: 1px solid red
+
+*:focus
+  outline: none
+
+html
+  height: 100%
+  margin: 0
+  -webkit-text-size-adjust: 100%
+  scroll-behavior: smooth
+
+a
+  outline: none
+  color: inherit
+  text-decoration: none
+
+table
+  width: 100%
+  border-collapse: collapse
+
+th,
+td
+  border: 1px solid black
+  text-align: center
+
+th
+  cursor: pointer
+
+img
+  height: auto
+  object-fit: cover
+
+svg
+  display: inline-block
+  width: 15px
+  height: 15px
+  fill: inherit
+  stroke: inherit
+  @include transition((fill, stroke), 0.3s, ease-out)
+
+path,
+circle
+  @include transition((fill, stroke), 0.3s, ease-out)
+
+p
+  margin: 0
+  padding: 0
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+select
+  appearance: none
+  -webkit-appearance: none
+  -moz-appearance: none
+  background: transparent
+
+body
+  min-width: 320px
+  height: 100%
+  font-family: $fontFamily-Ubuntu
+  font-style: $fontNormal
+  font-weight: $fontWeight-Regular
+  @include fontSize-lineHeight(16px, normal)
+  background-color: $color-gray-white
+
+.title
+  margin: 0
+  font-family: $fontFamily-WorkSans
+  font-weight: $fontWeight-Bold
+  @include fontSize-lineHeight(34px, normal)
+  color: $color-gray-black
+  letter-spacing: 0.02em
+  @include mobile
+    font-size: 25px
+
+.btn-reset
+  outline: none
+  border: none
+  padding: 0
+  text-align: center
+  background-color: transparent
+  cursor: pointer
+
+.list-reset
+  list-style: none
+  margin: 0
+  padding: 0
+  text-decoration: none
+
+.input-reset
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  outline: none
+  border: none
+  border-radius: 0
+  padding: 0
+  background-color: $color-gray-white
+  resize: none
+
+
+.input-reset::-webkit-search-decoration,
+.input-reset::-webkit-search-cancel-button,
+.input-reset::-webkit-search-results-button,
+.input-reset::-webkit-search-results-decoration
+  display: none
+
+.visually-hidden
+  position: absolute
+  overflow: hidden
+  margin: -1px
+  border: 0
+  padding: 0
+  width: 1px
+  height: 1px
+  clip: rect(0 0 0 0)
+
+.wrapper
+  display: flex
+  flex-direction: column
+  @include displayFlex(flex, column, null, null, null, null, null)
+  min-height: 100vh
+  &--loading
+    &::after
+      @include position(absolute, 0, 0, 0, 0)
+      z-index: 99
+      content: ""
+      width: 100%
+      height: 100%
+      background-color: $color-gray-gray7
+      opacity: 0.7
+
+.container
+  position: relative
+  max-width: $containerMaxWidth
+  min-width: $containerMinWidth
+  margin: 0 auto
+  padding: 0 $containerOffset
+
+  @include tablet-big
+    padding: 0 $containerOffsetTablet
+
+.header
+  padding: 24px 0
+  background-color: $color-brand-primary
+  box-shadow: 0 5px 20px 0 $color-brand-black-box-shadow
+
+  &__container
+    @include displayFlex(flex, null, null, null, space-between, center, null)
+    @include tablet-small
+      flex-direction: column
+      gap: 30px
+    @include tablet-mini
+      flex-direction: row
+      gap: 0px
+
+  &__menu
+    &-list
+      @include displayFlex(flex, row, null, null, null, center, 25px)
+      @include tablet-mini
+        display: none
+      &-burger
+        display: none
+        opacity: 0
+        @include tablet-mini
+          @include position(absolute, 0, null, 0, null)
+          z-index: 888
+          width: 100%
+          max-width: 250px
+          height: 100%
+          min-height: 100vh
+          padding: 100px 20px
+          overflow: hidden
+          &::after
+            content: ""
+            @include position(absolute, 0, 0, null, null)
+            z-index: -999
+            width: 100%
+            height: 100%
+            background-color: $color-brand-primary-active
+            backdrop-filter: blur(10px)
+          &--active
+            @include displayFlex(flex, column, null, null, flex-start, center, 50px)
+            opacity: 1
+        @include mobile
+          max-width: 100%
+
+    &-link,
+    &-link-burger
+      display: block
+      font-size: 45px
+      @include transition((background-color, border-color), 0.3s, ease)
+      &--authenticated
+        padding: 14px 22px
+        border: 2px solid $color-brand-primary
+        border-radius: 7px
+        font-family: $fontFamily-Ubuntu
+        font-weight: $fontWeight-Medium
+        @include fontSize-lineHeight(16px, 125%)
+        letter-spacing: -0.01em
+        text-align: center
+        color: $color-brand-primary
+        background-color: $color-gray-white
+      &--active
+        background-color: $color-state-info
+      &:focus,
+      &:hover,
+      &:active
+        background-color: $color-state-info
+        border-color: $color-brand-primary
+      &--logo
+        &:hover,
+        &:focus,
+        &:active
+          background-color: transparent
+          outline: none
+          border: none
+      @include tablet-mini
+        padding: 10px 16px
+        @include fontSize-lineHeight(18px, 125%)
+    &-btn
+      position: relative
+      z-index: 999
+      display: none
+      &-svg
+        width: 50px
+        height: 50px
+        fill: $color-gray-white
+        &--active
+          &:focus-visible path,
+          &:hover path
+            fill: $color-brand-secondary2
+          &:active path
+            fill: $color-brand-primary-link-hover
+          & path:nth-child(1),
+          & path:nth-child(2),
+          & path:nth-child(3)
+            transform: rotate(0deg) translate(0px, 0px)
+            @include transition((transform, fill), 0.4s, ease)
+          & path:nth-child(3)
+            opacity: 1
+            @include transition((opacity, fill), 0.2s, ease)
+
+        &--non-active
+          &:focus-visible path,
+          &:hover path
+            fill: $color-brand-secondary2
+          &:active path
+            fill: $color-brand-primary-link-hover
+          & path:nth-child(1)
+            transform: rotate(25deg) translate(5px, 0px)
+            @include transition((transform, fill), 0.4s, ease)
+          & path:nth-child(2)
+            transform: rotate(-25deg) translate(-14px, -5px)
+            @include transition((transform, fill), 0.4s, ease)
+          & path:nth-child(3)
+            opacity: 0
+            @include transition((opacity), 0.2s, ease)
+      @include tablet-mini
+        display: block
+  &__link--logo
+      position: relative
+      z-index: 999
+
+.score
+  margin-top: 50px
+  margin-bottom: 30px
+
+  &__container
+    @include displayFlex(flex, column, null, null, null, null, 50px)
+    @include mobile
+      gap: 25px
+  &__top
+    position: relative
+    @include displayFlex(flex, row, null, null, null, null, 35px)
+    @include laptop
+      flex-direction: column
+    @include mobile
+      gap: 20px
+
+    &-title
+      letter-spacing: 0.03em
+
+    &-select
+      @include position(relative, null, null, null, null)
+      width: 299px
+      @include mobile
+        width: 100%
+      &-main
+        padding: 11px 16px
+        border: 1px solid $color-brand-primary
+        border-radius: 7px
+        background-color: $color-gray-white
+        cursor: pointer
+        &-option
+          @include fontSize-lineHeight(16px, 153%)
+          font-family: $fontFamily-Ubuntu
+          font-weight: $fontWeight-Regular
+          letter-spacing: -0.01em
+          color: $color-gray-gray2
+        &-icon
+          @include position(absolute, 22px, null, 22px, null)
+          @include displayFlex(flex, column, null, null, null, center, null)
+          @include transition((transform), 0.3s, ease)
+          &--rotate
+            transform: rotate(180deg)
+          &-svg
+            width: 10px
+            height: 6px
+      &-options
+        @include position(absolute, 100%, 0, 0, 0)
+        z-index: 1000
+        height: auto
+        transform: scaleY(0)
+        transform-origin: top
+        display: block
+        padding: 0px
+        overflow: hidden
+        border-radius: 7px
+        background-color: $color-gray-white
+        box-shadow: 0 5px 20px 0 $color-brand-black-box-shadow
+        @include transition((transform, padding), .3s, ease-in-out)
+        &--show
+          transform: scaleY(1)
+          padding: 10px 0
+          height: max-content
+        &-item
+          @include position(relative, null, null, null, null)
+          padding: 10px 16px
+          @include fontSize-lineHeight(16px, 153%)
+          font-family: $fontFamily-Ubuntu
+          font-weight: $fontWeight-Regular
+          letter-spacing: -0.01em
+          color: $color-gray-gray2
+          cursor: pointer
+          @include transition((background-color), .5s, ease)
+          &-icon
+            @include position(absolute, 10px, null, 15px, null)
+            &-svg
+              width: 24px
+              height: 24px
+          &:hover
+            background-color: $color-state-info
+
+    &-btn
+      @include displayFlex(flex, row, null, null, null, center, 15px)
+      margin-left: auto
+      margin-top: -7px
+      padding: 16px 26px
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(16px, 143%)
+      color: $color-gray-white
+      background-color: $color-brand-primary
+      @include transition((background-color), .3s, ease)
+      letter-spacing: -0.01em
+      @include laptop
+        @include position(absolute, 50px, null, 50px, null)
+      @include tablet-big
+        right: 15px
+      @include tablet-mini
+        @include position(relative, 0px, null, 0px, null)
+        margin-right: auto
+      @include mobile
+        justify-content: center
+        width: 100%
+
+      &:focus,
+      &:hover
+        background-color: $color-brand-primary-hover
+      &:active
+        background-color: $color-brand-primary-active
+
+  &__bottom
+    &-list
+      display: grid
+      grid-template-columns: repeat(3, 1fr)
+      grid-gap: 50px 70px
+      @include laptop
+        grid-template-columns: repeat(2, 1fr)
+      @include tablet-big
+        grid-gap: 50px 50px
+      @include tablet-small
+        grid-template-columns: 1fr
+      @include mobile
+        grid-gap: 25px
+    &-item
+      &-load,
+      &-failed,
+      &-empty
+        height: 153px
+        border-radius: 9px
+      &-failed
+        @include displayFlex(flex, null, null, null, center, center, null)
+        border: 3px solid $color-state-error
+      &-empty
+        @include displayFlex(flex, null, null, null, center, center, null)
+        box-shadow: 0 5px 20px 0 $color-brand-black-box-shadow
+        background-color: $color-gray-white
+      &-wrapper
+        @include displayFlex(flex, column, null, null, null, null, 9px)
+        padding: 22px
+        border-radius: 9px
+        box-shadow: 0 5px 20px 0 $color-brand-black-box-shadow
+        background-color: $color-gray-white
+      &-number
+        font-family: $fontFamily-Roboto
+        font-weight: $fontWeight-Medium
+        @include fontSize-lineHeight(18px, 122%)
+        letter-spacing: -0.01em
+        color: $color-brand-secondary1
+        @include mobile
+          font-size: 16px
+      &-amount
+        font-family: $fontFamily-Ubuntu
+        font-weight: $fontWeight-Regular
+        @include fontSize-lineHeight(14px, 143%)
+        color: $color-brand-secondary1
+      &-date
+        @include displayFlex(flex, column, null, null, null, null, null)
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(13px, normal)
+        letter-spacing: 0.02em
+        color: $color-gray-black
+        &-value
+          font-weight: $fontWeight-Regular
+      &-btn
+        margin-left: auto
+        padding: 15px 22px
+        border-radius: 7px
+        font-family: var(--font-family)
+        font-weight: $fontWeight-Medium
+        @include fontSize-lineHeight(16px, 125%)
+        letter-spacing: 0.01em
+        color: $color-gray-white
+        background-color: $color-brand-primary
+        @include transition((background-color), .3s, ease)
+        @include mobile
+          margin-right: auto
+          margin-top: 10px
+
+        &:focus,
+        &:hover
+          background-color: $color-brand-primary-hover
+        &:active
+          background-color: $color-brand-primary-active
+      &-bottom
+        @include displayFlex(flex, row, null, null, space-between, flex-end, null)
+        @include mobile
+          flex-direction: column
+          align-items: normal
+
+.scoreItem
+  margin-top: 50px
+  margin-bottom: 30px
+
+  &__container
+    @include displayFlex(flex, column, null, null, null, null, 50px)
+    @include tablet-small
+      gap: 25px
+  &__top
+    @include position(relative, null, null, null, null)
+    @include displayFlex(flex, column, null, null, null, null, 30px)
+    @include tablet-mini
+      gap: 10px
+
+    &-btn
+      @include position(absolute, -6px, null, 2px, null)
+      @include displayFlex(inline-flex, row, null, null, null, center, 15px)
+      padding: 16px 25px
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(16px, 125%)
+      letter-spacing: -0.01em
+      text-align: center
+      color: $color-gray-white
+      background-color: $color-brand-primary
+      @include transition((background-color), .3s, ease)
+      &:focus,
+      &:hover
+        background-color: $color-brand-primary-hover
+      &:active
+        background-color: $color-brand-primary-active
+      @include tablet-mini
+        @include position(relative, 0, null, 0, null)
+        max-width: 205px
+        margin-left: auto
+        padding: 11px 20px
+    &-wrapper
+      @include displayFlex(flex, row, null, null, space-between, center, null)
+      @include tablet-big
+        flex-direction: column
+        gap: 10px
+      &-number
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Regular
+        @include fontSize-lineHeight(34px, normal)
+        letter-spacing: -0.02em
+        color: $color-gray-black
+        @include tablet-small
+          font-size: 25px
+        @include tablet-mini
+          font-size: 18px
+          text-align: center
+        &--error
+          border: 3px solid $color-state-error
+          border-radius: 50px
+          font-weight: $fontWeight-Regular
+          @include fontSize-lineHeight(14px, normal)
+          text-align: center
+        &-load
+          min-width: 400px
+          border-radius: 50px
+        &-failed
+          padding: 5px
+          @include displayFlex(flex, null, null, null, center, center, null)
+          max-width: 100%
+          border-radius: 50px
+          background-color: $color-gray-white
+        &-span
+          min-width: 400px
+          display: inline-block
+          margin-left: 10px
+          border-radius: 50px
+          @include tablet-mini
+            display: inline
+            min-width: 100%
+            margin-left: 5px
+      &-balance
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+        letter-spacing: -0.02em
+        color: $color-gray-black
+        @include tablet-small
+          font-size: 18px
+        @include mobile
+          font-size: 16px
+        &--error
+          padding: 5px
+          border: 3px solid $color-state-error
+          border-radius: 50px
+          font-weight: $fontWeight-Regular
+          @include fontSize-lineHeight(14px, normal)
+          text-align: center
+        &-load
+          min-width: 200px
+          border-radius: 50px
+        &-failed
+          @include displayFlex(flex, null, null, null, center, center, null)
+          max-width: 100%
+          border-radius: 50px
+          background-color: $color-gray-white
+        &-span
+          display: inline-block
+          border-radius: 50px
+          font-weight: $fontWeight-Regular
+          &:first-child
+            min-width: 100px
+            margin-left: 30px
+          &:last-child
+            margin-left: 10px
+
+  &__bottom
+    display: grid
+    grid-template-columns: 45% 1fr
+    grid-template-rows: 288px 1fr
+    gap: 49px
+    @include laptop
+      grid-template-columns: 1fr
+      gap: 20px
+    @include mobile
+      grid-template-rows: 1fr
+
+    &-translation
+      grid-column: 1 / 2
+      grid-row: 1 / 2
+      padding: 25px 50px
+      border-radius: 50px
+      background-color: $color-gray-gray7
+      @include laptop
+        grid-column: 1 / -1
+      @include tablet-small
+        padding: 25px
+      &--emptying
+        padding: 0px
+      &--loading
+        padding: 0px
+        box-shadow: none
+        overflow: hidden
+      &--error
+        padding: 0px
+        box-shadow: none
+        border: 3px solid $color-state-error
+      &-load
+        height: 100%
+      &-failed,
+      &-empty
+        @include displayFlex(flex, null, null, null, center, center, null)
+        height: 100%
+      &-title
+        margin-bottom: 25px
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+      &-form
+        @include displayFlex(flex, column, null, null, null, null, 23px)
+        @include laptop
+          align-items: center
+        @include mobile
+          gap: 10px
+        &-label
+          position: relative
+          @include displayFlex(flex, null, null, null, null, center, 18px)
+          width: 100%
+          max-width: 505px
+          @include tablet-mini
+            justify-content: space-between
+            gap: 5px
+          @include mobile
+            flex-direction: column
+          &-div
+            position: relative
+            width: 100%
+            max-width: 300px
+            &-type
+              &-img
+                @include position(absolute, -60px, null, 0, null)
+                width: 50px
+                height: 50px
+          &-span
+            @include displayFlex(flex, null, null, null, flex-end, null, 0px)
+            max-width: 190px
+            width: 100%
+            font-family: $fontFamily-Ubuntu
+            font-weight: $fontWeight-Medium
+            @include fontSize-lineHeight(16px, 125%)
+            letter-spacing: -0.01em
+            color: $color-brand-secondary1
+            text-align: right
+            @include tablet-small
+              font-size: 14px
+            @include tablet-mini
+              justify-content: center
+              width: 50%
+              text-align: center
+          &-input
+            @include position(relative, null, null, null, null)
+            max-width: 300px
+            min-width: 300px
+            width: 100%
+            padding: 11px 10px 13px 16px
+            border: 1px solid $color-gray-gray5
+            border-radius: 7px
+            font-family: $fontFamily-Ubuntu
+            font-weight: $fontWeight-Regular
+            @inclide fontSize-lineHeight(16px, 150%)
+            letter-spacing: -0.01em
+            color: $color-gray-black
+            background-color: $color-gray-white
+            cursor: pointer
+            @include transition((background-color, border-color), .3s, ease)
+            &:focus,
+            &:hover,
+            &:active
+              border-color: $color-brand-primary
+              background-color: $color-brand-primary-input
+            @include mobile
+              min-width: 100%
+          &-icon
+            @include position(absolute, 21px, null, 21px, null)
+            z-index: 99
+            @include displayFlex(flex, column, null, null, null, center, null)
+            @include transition((transform), 0.3s, ease)
+            @include mobile
+              top: 20px
+              right: 55px
+            &--rotate
+              transform: rotate(180deg)
+            &-svg
+              width: 10px
+              height: 6px
+          &-dropdown
+            z-index: 1
+            @include position(absolute, 100%, null, 0, null)
+            max-width: 300px
+            width: 100%
+            transform: scaleY(0)
+            border: 1px solid $color-gray-gray5
+            border-radius: 7px
+            background-color: $color-gray-white
+            &--open
+              transform: scaleY(1)
+              @include tablet-mini
+                max-width: 100%
+            &-list
+              @include displayFlex(flex, column, null, null, null, null, null)
+              overflow: hidden
+              &-item
+                position: relative
+                padding: 11px 10px 13px 16px
+                cursor: pointer
+                @include transition((background-color), .5s, ease)
+                &:hover,
+                &:active
+                  background-color: $color-brand-primary-hover
+                @include tablet-small
+                  font-size: 14px
+                &-text
+                  font-family: $fontFamily-Ubuntu
+                  font-weight: $fontWeight-Regular
+                  @inclide fontSize-lineHeight(16px, 150%)
+                  letter-spacing: -0.01em
+                  color: $color-gray-black
+                  @include tablet-mini
+                    font-size: 14px
+                &-img
+                  @include position(absolute, 50%, null, 10px, null)
+                  transform: translateY(-50%)
+                  width: 30px
+                  height: auto
+          &-error,
+          &-error-own
+            z-index: 1
+            @include position(absolute, -15px, null, 0, null)
+            width: 100%
+            @include fontSize-lineHeight(12px, normal)
+            color: $color-state-error
+            text-align: right
+        &-btn
+          align-self: center
+          @include displayFlex(inline-flex, null, null, null, center, center, 10px)
+          padding: 16px 30px
+          margin-top: 2px
+          margin-left: 70px
+          border-radius: 7px
+          font-family: $fontFamily-Ubuntu
+          font-weight: $fontWeight-Medium
+          @include fontSize-lineHeight(16px, 125%)
+          letter-spacing: -0.01em
+          letter-spacing: -0.01em
+          color: $color-gray-white
+          background-color: $color-brand-primary
+          @include transition((background-color), .3s, ease)
+          &:focus,
+          &:hover
+            background-color: $color-brand-primary-hover
+          &:active
+            background-color: $color-brand-primary-active
+          @include mobile
+            margin: 0
+    &-chart
+      grid-column: 2 / 3
+      grid-row: 1 / 2
+      padding: 25px 45px 20px 45px
+      border-radius: 50px
+      background-color: $color-gray-white
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25)
+      overflow: hidden
+      cursor: pointer
+      @include laptop
+        grid-column: 1 / -1
+        grid-row: 2 / 3
+      @include tablet-small
+        padding: 25px
+      &--emptying
+        padding: 25px 45px 20px 45px
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25)
+      &--loading
+        padding: 0px
+        box-shadow: none
+      &--error
+        padding: 0px
+        box-shadow: none
+        border: 3px solid $color-state-error
+      &-load
+        height: 100%
+      &-failed,
+      &-empty
+        @include displayFlex(flex, null, null, null, center, center, null)
+        height: 100%
+        background-color: $color-gray-white
+      &-title
+        margin-left: 5px
+        margin-bottom: -5px
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+      &-wrapper
+        position: relative
+        width: 100%
+        height: 252px
+        &-canvas
+          width: 100%
+          height: 100%
+    &-story
+      grid-column: 1 / -1
+      grid-row: 2 / 3
+      padding: 25px 50px
+      border-radius: 50px
+      background-color: $color-gray-gray7
+      overflow: hidden
+      cursor: pointer
+      @include laptop
+        grid-row: 3 / 4
+      @include tablet-small
+        padding: 25px
+      &--emptying
+        padding: 0px
+      &--loading
+        padding: 0px
+        box-shadow: none
+      &--error
+        padding: 0px
+        box-shadow: none
+        border: 3px solid $color-state-error
+      &-load
+        max-height: 100%
+        height: 346px
+      &-failed,
+      &-empty
+        @include displayFlex(flex, null, null, null, center, center, null)
+        max-height: 100%
+        height: 346px
+      &-title
+        margin-bottom: 25px
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+      &-table
+        box-sizing: border-box
+        &-head
+          display: table
+          table-layout: fixed
+          width: 100%
+          border-radius: 15px
+          background-color: $color-brand-primary
+          &-tr
+            @include displayFlex(flex, null, null, null, null, null, 0)
+            padding: 0 50px
+            @include tablet-small
+              padding: 25px
+            @include tablet-mini
+              align-items: center
+          &-th
+            padding: 20px 0
+            width: 100%
+            border: none
+            font-family: $fontFamily-Ubuntu
+            font-weight: $fontWeight-Medium
+            @include fontSize-lineHeight(20px, 120%)
+            color: $color-gray-white
+            text-align: left
+            cursor: none
+            pointer-events: none
+            letter-spacing: -0.01em
+            &:nth-child(3),
+            &:nth-child(4)
+              text-align: center
+            @include tablet-small
+              font-size: 14px
+              transform: rotate(-45deg)
+            @include mobile
+              font-size: 11px
+              transform: rotate(-90deg)
+
+        &-body
+          position: relative
+          width: 100%
+          &-tr
+            position: relative
+            padding: 0 50px
+            display: flex
+            align-items: center
+            justify-content: space-between
+            width: 100%
+            height: 70px
+            border-radius: 15px
+            @include tablet-small
+              padding: 25px
+            @include mobile
+              padding: 45px 25px
+            &::after
+              content: ""
+              position: absolute
+              left: 0
+              bottom: 0
+              border-bottom: 2px solid $color-brand-table-tr
+              width: 100%
+          &-td
+            width: 100%
+            border: none
+            font-family: $fontFamily-Ubuntu
+            font-weight: $fontWeight-Regular
+            @include fontSize-lineHeight(16px, 150%)
+            letter-spacing: -0.01em
+            color: $color-gray-gray2
+            text-align: left
+            word-break: break-all
+            @include laptop
+              padding-right: 10px
+            @include tablet-small
+              font-size: 13px
+              padding-right: 10px
+            @include mobile
+              font-size: 10px
+            &:nth-child(3),
+            &:nth-child(4)
+              text-align: center
+
+.scoreItemHistory
+  margin-top: 50px
+  margin-bottom: 30px
+
+  &__container
+    @include displayFlex(flex, column, null, null, null, null, 50px)
+    @include tablet-small
+      gap: 25px
+  &__top
+    @include position(relative, null, null, null, null)
+    @include displayFlex(flex, column, null, null, null, null, 30px)
+    @include tablet-mini
+      gap: 10px
+
+    &-btn
+      @include position(absolute, -6px, null, 2px, null)
+      @include displayFlex(inline-flex, row, null, null, null, center, 15px)
+      padding: 16px 25px
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(16px, 125%)
+      letter-spacing: -0.01em
+      text-align: center
+      color: $color-gray-white
+      background-color: $color-brand-primary
+      @include transition((background-color), .3s, ease)
+      &:focus,
+      &:hover
+        background-color: $color-brand-primary-hover
+      &:active
+        background-color: $color-brand-primary-active
+      @include tablet-mini
+        @include position(relative, 0, null, 0, null)
+        max-width: 205px
+        margin-left: auto
+        padding: 11px 20px
+    &-wrapper
+      @include displayFlex(flex, row, null, null, space-between, center, null)
+      @include tablet-big
+        flex-direction: column
+      &-number
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Regular
+        @include fontSize-lineHeight(34px, normal)
+        letter-spacing: -0.02em
+        color: $color-gray-black
+        @include tablet-small
+          font-size: 25px
+        @include tablet-mini
+          font-size: 18px
+          text-align: center
+        &--error
+          border: 3px solid $color-state-error
+          border-radius: 50px
+          font-weight: $fontWeight-Regular
+          @include fontSize-lineHeight(14px, normal)
+          text-align: center
+        &-load
+          min-width: 400px
+          border-radius: 50px
+        &-failed
+          padding: 5px
+          @include displayFlex(flex, null, null, null, center, center, null)
+          max-width: 100%
+          border-radius: 50px
+          background-color: $color-gray-white
+        &-span
+          min-width: 400px
+          display: inline-block
+          margin-left: 10px
+          border-radius: 50px
+          @include tablet-mini
+            display: inline
+            min-width: 100%
+            margin-left: 5px
+      &-balance
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+        letter-spacing: -0.02em
+        color: $color-gray-black
+        @include tablet-small
+          font-size: 18px
+        @include mobile
+          font-size: 16px
+        &--error
+          padding: 5px
+          border: 3px solid $color-state-error
+          border-radius: 50px
+          font-weight: $fontWeight-Regular
+          @include fontSize-lineHeight(14px, normal)
+          text-align: center
+        &-load
+          min-width: 200px
+          border-radius: 50px
+        &-failed
+          @include displayFlex(flex, null, null, null, center, center, null)
+          max-width: 100%
+          border-radius: 50px
+          background-color: $color-gray-white
+        &-span
+          display: inline-block
+          border-radius: 50px
+          font-weight: $fontWeight-Regular
+          &:first-child
+            min-width: 100px
+            margin-left: 30px
+          &:last-child
+            margin-left: 10px
+  &__bottom
+    display: grid
+    grid-template-columns: 1fr
+    grid-template-rows: 288px 288px 1fr
+    gap: 49px
+    @include tablet-mini
+      gap: 25px
+      grid-template-rows: 1fr
+    &-chart
+      grid-column: 1 / -1
+      padding: 25px 94px 20px 94px
+      border-radius: 50px
+      background-color: $color-gray-white
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25)
+      overflow: hidden
+      @include tablet-big
+        padding: 25px
+      &--emptying
+        padding: 25px 45px 20px 45px
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25)
+      &--loading
+        padding: 0px
+        box-shadow: none
+      &--error
+        padding: 0px
+        box-shadow: none
+        border: 3px solid $color-state-error
+      &-load
+        height: 100%
+      &-failed,
+      &-empty
+        @include displayFlex(flex, null, null, null, center, center, null)
+        height: 100%
+        background-color: $color-gray-white
+      &-title
+        margin-left: 5px
+        margin-bottom: -5px
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+      &-wrapper
+        position: relative
+        width: 100%
+        max-width: 1140px
+        height: 252px
+        &-canvas
+          width: 100%
+          height: 100%
+    &-story
+      grid-column: 1 / -1
+      grid-row: 2 / 3
+      padding: 25px 50px
+      border-radius: 50px
+      background-color: $color-gray-gray7
+      overflow: hidden
+      @include tablet-small
+        padding: 25px
+      &--optional
+        grid-row: 3 / 4
+      &--emptying
+        padding: 0px
+      &--loading
+        padding: 0px
+        box-shadow: none
+      &--error
+        padding: 0px
+        box-shadow: none
+        border: 3px solid $color-state-error
+      &-load
+        max-height: 100%
+        height: 346px
+      &-failed,
+      &-empty
+        @include displayFlex(flex, null, null, null, center, center, null)
+        max-height: 100%
+        height: 346px
+      &-title
+        margin-bottom: 25px
+        font-family: $fontFamily-WorkSans
+        font-weight: $fontWeight-Bold
+        @include fontSize-lineHeight(20px, normal)
+      &-table
+        box-sizing: border-box
+        &-head
+          display: table
+          table-layout: fixed
+          width: 100%
+          border-radius: 15px
+          background-color: $color-brand-primary
+          &-tr
+            @include displayFlex(flex, null, null, null, null, null, 0)
+            padding: 0 50px
+            @include tablet-small
+              padding: 25px
+            @include tablet-mini
+              align-items: center
+          &-th
+            padding: 20px 0
+            width: 100%
+            border: none
+            font-family: $fontFamily-Ubuntu
+            font-weight: $fontWeight-Medium
+            @include fontSize-lineHeight(20px, 120%)
+            color: $color-gray-white
+            text-align: left
+            cursor: none
+            pointer-events: none
+            letter-spacing: -0.01em
+            &:nth-child(3),
+            &:nth-child(4)
+              text-align: center
+            @include tablet-small
+              font-size: 14px
+              transform: rotate(-45deg)
+            @include mobile
+              font-size: 11px
+              transform: rotate(-90deg)
+
+        &-body
+          position: relative
+          width: 100%
+          &-tr
+            position: relative
+            padding: 0 50px
+            display: flex
+            align-items: center
+            justify-content: space-between
+            width: 100%
+            height: 70px
+            border-radius: 15px
+            @include tablet-small
+              padding: 25px
+            @include mobile
+              padding: 45px 25px
+            &::after
+              content: ""
+              position: absolute
+              left: 0
+              bottom: 0
+              border-bottom: 2px solid $color-brand-table-tr
+              width: 100%
+          &-td
+            width: 100%
+            border: none
+            font-family: $fontFamily-Ubuntu
+            font-weight: $fontWeight-Regular
+            @include fontSize-lineHeight(16px, 150%)
+            letter-spacing: -0.01em
+            color: $color-gray-gray2
+            text-align: left
+            word-break: break-all
+            @include laptop
+              padding-right: 10px
+            @include tablet-small
+              font-size: 13px
+              padding-right: 10px
+            @include mobile
+              font-size: 11px
+            &:nth-child(3),
+            &:nth-child(4)
+              text-align: center
+
+.map
+  margin-top: 50px
+  margin-bottom: 30px
+
+  &__title
+    margin-bottom: 59px
+    letter-spacing: 0.02em
+  &__error
+    @include position(relative, null, null, null, null)
+    @include displayFlex(flex, null, null, null, center, center, 10px)
+    height: 100%
+    margin: auto
+    @include fontSize-lineHeight(20px, normal)
+  &__yandex
+    @include position(relative, null, null, null, null)
+    max-width: 1340px
+    height: 728px
+    &--error
+      border: 3px solid $color-state-error
+    &-load
+      height: 100%
+    &-failed
+      @include displayFlex(flex, null, null, null, center, center, null)
+      max-height: 100%
+      height: 346px
+    @include tablet-small
+      height: 528px
+
+.currency
+  margin-top: 50px
+  margin-bottom: 30px
+
+  &__container
+    @include displayFlex(flex, column, null, null, null, null, 55px)
+    @include mobile
+      gap: 20px
+  &__title
+    letter-spacing: 0.02em
+
+  &__blocks
+    display: grid
+    grid-template-columns: minmax(588px, max-content)
+    grid-template-rows: 410px 273px
+    gap: 49px
+    @include laptop
+      grid-template-columns: minmax(100px, max-content)
+      grid-template-rows: 410px 1fr
+      gap: 30px
+    @include tablet-small
+      grid-template-columns: 1fr
+      grid-template-rows: 410px 1fr
+    @include mobile
+      grid-template-rows: 360px 1fr
+
+  &__yours
+    grid-column: 1 / 2
+    padding: 50px
+    border-radius: 50px
+    background-color: $color-gray-white
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25)
+    overflow: hidden
+    @include tablet-small
+      grid-column: 1 / -1
+      grid-row: 1 / 2
+      order: 1
+    &--loading
+      padding: 0px
+      box-shadow: none
+    &--error
+      padding: 0px
+      box-shadow: none
+      border: 3px solid $color-state-error
+    &-load
+      height: 100%
+    &-failed,
+    &-empty
+      @include displayFlex(flex, null, null, null, center, center, null)
+      height: 100%
+    &-title
+      @include fontSize-lineHeight(20px, normal)
+    &-list
+      margin-top: 25px
+      @include displayFlex(flex, column, null, null, null, null, 24px)
+      max-height: 439px
+      height: 100%
+      overflow-y: hidden
+      @include transition((transform, max-height), 0.3s, ease)
+    &-item
+      position: relative
+      @include displayFlex(flex, null, null, null, space-between, center, null)
+      font-family: $fontFamily-WorkSans
+      @include fontSize-lineHeight(20px, normal)
+      letter-spacing: 0.1em
+      @include mobile
+        font-size: 14px
+      &::after
+        content: ""
+        @include position(absolute, null, 0, null, 5px)
+        width: 100%
+        border-bottom: 1px dashed $color-gray-black
+      &-type
+        z-index: 1
+        padding-right: 10px
+        font-weight: $fontWeight-SemiBold
+        background-color: $color-gray-white
+      &-number
+        z-index: 1
+        padding-left: 10px
+        font-weight: $fontWeight-Regular
+        background-color: $color-gray-white
+
+  &__exchange
+    grid-column: 1 / 2
+    padding: 48px
+    border-radius: 50px
+    background-color: $color-gray-white
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25)
+    overflow: hidden
+    @include tablet-small
+      grid-column: 1 / -1
+      grid-row: 2 / 3
+      order: 2
+    &--loading
+      padding: 0px
+      box-shadow: none
+    &--error
+      padding: 0px
+      box-shadow: none
+      border: 3px solid $color-state-error
+    &-load
+      height: 100%
+    &-failed,
+    &-empty
+      @include displayFlex(flex, null, null, null, center, center, null)
+      height: 100%
+    &-title
+      margin-bottom: 22px
+      @include fontSize-lineHeight(20px, normal)
+
+    &-form
+      position: relative
+      @include displayFlex(flex, row, null, null,  space-between, stretch, 15px)
+      @include tablet-small
+        align-items: center
+      @include mobile
+        align-items: stretch
+      &-left
+        @include displayFlex(flex, column, null, null,  null, null, 27px)
+        @include laptop
+          gap: 15px
+        @include tablet-small
+          align-items: center
+      &-error,
+      &-error-amount
+        z-index: 1
+        @include position(absolute, -20px, null, 0, null)
+        width: 100%
+        @include fontSize-lineHeight(12px, normal)
+        color: $color-state-error
+        text-align: right
+      @include laptop
+        flex-direction: column
+    &-wrapper-label
+      @include displayFlex(flex, row, null, null,  space-between, center, 20px)
+      @include tablet-big
+        gap: 10px
+      @include tablet-small
+        flex-direction: column
+        gap: 15px
+      @include tablet-small
+        flex-direction: row
+      @include tablet-mini
+        flex-direction: column
+    &-label
+      @include displayFlex(flex, row, null, null,  null, center, null)
+      width: 100%
+      &-text
+        font-family: $fontFamily-Ubuntu
+        font-weight: $fontWeight-Medium
+        @include fontSize-lineHeight(16px, 125%)
+        letter-spacing: -0.01em
+        text-align: center
+        color: $color-gray-black
+        @include tablet-small
+          width: 50px
+      &--input
+        gap: 8px
+        justify-content: center
+      &--select
+        gap: 20px
+        @include tablet-big
+          gap: 10px
+      &-custom
+        position: relative
+        @include displayFlex(flex, column, null, null,  null, null, null)
+        width: 100%
+        &-select
+          position: relative
+          max-width: 134px
+          width: 100%
+          border: 1px solid $color-gray-gray5
+          border-radius: 7px
+          padding: 10px 50px 10px 15px
+          background: $color-gray-white
+          cursor: pointer
+          @include tablet-big
+            padding-right: 15px
+            max-width: none
+          @include tablet-small
+            min-width: 134px
+            padding-right: 50px
+          &-main
+            &-option
+              font-family: $fontFamily-Ubuntu
+              font-weight: $fontWeight-Regular
+              @include fontSize-lineHeight(16px, 150%)
+              letter-spacing: -0.01em
+              color: $color-gray-black
+            &-icon
+              @include position(absolute, 19px, null, 19px, null)
+              @include displayFlex(flex, column, null, null, null, center, null)
+              @include transition((transform), 0.3s, ease)
+              &--rotate
+                transform: rotate(180deg)
+              &-svg
+                width: 10px
+                height: 6px
+          &-options
+            @include position(absolute, 100%, 0, 0, 0)
+            z-index: 1000
+            height: auto
+            max-height: 133px
+            transform: scaleY(0)
+            transform-origin: top
+            display: block
+            padding: 0px
+            border-radius: 7px
+            background-color: $color-gray-white
+            overflow-y: auto
+            box-shadow: 0 5px 20px 0 $color-brand-black-box-shadow
+            @include transition((transform, padding), .3s, ease-in-out)
+            &--show
+              transform: scaleY(1)
+              height: max-content
+            &-item
+              @include position(relative, null, null, null, null)
+              padding: 10px 50px 10px 15px
+              font-family: $fontFamily-Ubuntu
+              font-weight: $fontWeight-Regular
+              @include fontSize-lineHeight(16px, 150%)
+              letter-spacing: -0.01em
+              color: $color-gray-black
+              cursor: pointer
+              @include transition((background-color), .5s, ease)
+              &:hover
+                background-color: $color-state-info
+            @include tablet-big
+              max-width: 134px
+            @include tablet-small
+              max-width: inherit
+    &-input
+      @include position(relative, null, null, null, null)
+      max-width: 303px
+      width: 100%
+      padding: 10px 50px 10px 16px
+      border: 1px solid $color-gray-gray5
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Regular
+      @inclide fontSize-lineHeight(16px, 150%)
+      letter-spacing: -0.01em
+      color: $color-gray-black
+      background-color: $color-gray-white
+      @include transition((background-color, border-color), .3s, ease)
+      &:focus,
+      &:hover,
+      &:active
+        border-color: $color-brand-primary
+        background-color: $color-brand-primary-input
+    &-btn
+      padding: 16px
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(16px, 125%)
+      letter-spacing: -0.01em
+      letter-spacing: -0.01em
+      color: $color-gray-white
+      background-color: $color-brand-primary
+      @include transition((background-color), .3s, ease)
+      &:focus,
+      &:hover
+        background-color: $color-brand-primary-hover
+      &:active
+        background-color: $color-brand-primary-active
+
+  &__rate
+    grid-column: 2 / 3
+    grid-row: 1 / -1
+    padding: 50px
+    border-radius: 50px
+    background-color: $color-gray-gray8
+    overflow: hidden
+    @include tablet-small
+      grid-column: 1 / -1
+      grid-row: 3 / 4
+      order: 3
+    &--loading
+      padding: 0px
+      box-shadow: none
+    &--error
+      padding: 0px
+      box-shadow: none
+      border: 3px solid $color-state-error
+    &-load
+      height: 100%
+    &-failed,
+    &-empty
+      @include displayFlex(flex, null, null, null, center, center, null)
+      height: 100%
+    &-title
+      margin-bottom: 25px
+      @include fontSize-lineHeight(20px, normal)
+    &-list
+      @include displayFlex(flex, column, null, null, null, null, 29px)
+    &-item
+      position: relative
+      @include displayFlex(flex, row, null, null, space-between, null, null)
+      font-family: $fontFamily-WorkSans
+      @include fontSize-lineHeight(20px, normal)
+      letter-spacing: 0.1em
+      color: $color-gray-black
+      @include mobile
+        font-size: 14px
+      &::after
+        content: ""
+        @include position(absolute, null, 0, null, 5px)
+        width: 100%
+        border-bottom: 1px dashed $color-gray-black
+      &--up::after
+        border-color: $color-state-success
+      &--down::after
+        border-color: $color-brand-secondary4
+      &-pair
+        z-index: 1
+        padding-right: 10px
+        font-weight: $fontWeight-SemiBold
+        background-color: $color-gray-gray8
+      &-number
+        z-index: 1
+        padding-left: 10px
+        font-weight: $fontWeight-Regular
+        background-color: $color-gray-gray8
+        &-icon
+          &-svg
+            width: 20px
+            &--up
+              transform: rotate(-180deg)
+              path
+                fill: $color-state-success
+            &--down path
+              fill: $color-brand-secondary4
+
+.modal
+  @include position(absolute, 50%, 50%, 0, 0)
+  transform: translate(-50%, -41%)
+  max-width: 500px
+  width: 100%
+  max-height: 366px
+  border-radius: 50px
+  background-color: $color-gray-gray7
+  @include mobile
+    max-height: 310px
+
+  &__content
+    @include displayFlex(flex, column, null, null, null, null, null)
+    padding: 50px 40px
+    @include mobile
+      padding: 25px 20px
+
+  &__title
+    @include position(relative, 0, -14px, 0, 0)
+    margin-bottom: 35px
+    text-align: center
+    @include mobile
+      left: 0
+      margin-bottom: 15px
+
+  &__form
+    @include displayFlex(flex, column, null, null, null, flex-start, 24px)
+    @include mobile
+      gap: 15px
+      align-items: center
+
+    &-label
+      @include displayFlex(flex, null, null, null, null, center, 15px)
+      width: 100%
+      @include mobile
+        flex-direction: column
+        gap: 5px
+
+    &-span
+      @include displayFlex(flex, null, null, null, flex-end, null, 0px)
+      width: 60px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(16px, 125%)
+      letter-spacing: -0.01em
+      color: $color-brand-secondary1
+      @include mobile
+        justify-content: center
+
+    &-input
+      width: 300px
+      padding: 11px 10px 13px 16px
+      border: 1px solid $color-gray-gray5
+      border-radius: 7px
+      background-color: $color-gray-white
+      @include transition((background-color, border-color), .3s, ease)
+      @include mobile
+        width: 100%
+
+      &:focus,
+      &:hover,
+      &:active
+        border-color: $color-brand-primary
+        background-color: $color-brand-primary-input
+
+    &-bottom
+      @include displayFlex(flex, row, null, null, center, center, 15px)
+      @include mobile
+        gap: 0
+    &-btn
+      margin-top: 6px
+      margin-left: 75px
+      padding: 14px 21px
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(14px, 143%)
+      letter-spacing: -0.01em
+      color: $color-gray-white
+      background-color: $color-brand-primary
+      @include transition((background-color), .3s, ease)
+      @include mobile
+        margin: 0
+      &:focus,
+      &:hover
+        background-color: $color-brand-primary-hover
+      &:active
+        background-color: $color-brand-primary-active
+    &-error
+      color: $color-state-error
+
+.loader
+  @include position(absolute, 50%, 50%, null, null)
+  z-index: 999
+  transform: translate(-50%,-50%)
+  @include displayFlex(flex, null, null, null, center, center, 10px)
+  height: 100%
+  margin: auto
+  &-item
+    width: 30px
+    height: 100px
+    background-color: $color-brand-primary
+
+.not-found
+  margin-top: 50px
+  margin-bottom: 30px
+
+  &__container
+    @include displayFlex(flex, column, null, null, null, center, null)
+  &__title
+    @include fontSize-lineHeight(100px, 100%)
+    font-family: $fontFamily-Ubuntu
+    font-weight: $fontWeight-Bold
+    letter-spacing: -0.01em
+    color: $color-brand-primary
+  &__description
+    margin: 50px 0
+    @include fontSize-lineHeight(70px, 100%)
+    font-family: $fontFamily-Ubuntu
+    font-weight: $fontWeight-Medium
+  &__btn
+      @include displayFlex(inline-flex, row, null, null, null, center, 15px)
+      padding: 16px 25px
+      border-radius: 7px
+      font-family: $fontFamily-Ubuntu
+      font-weight: $fontWeight-Medium
+      @include fontSize-lineHeight(16px, 125%)
+      letter-spacing: -0.01em
+      text-align: center
+      color: $color-gray-white
+      background-color: $color-brand-primary
+      @include transition((background-color), .3s, ease)
+      &:focus,
+      &:hover
+        background-color: $color-brand-primary-hover
+      &:active
+        background-color: $color-brand-primary-active
+
+
+
+.drop
+  background-color: $color-gray-gray6
+  cursor: move
+  &--dragging
+    border: 5px dashed $color-brand-primary
+    background-color: #76CA6680
+    opacity: 0.3
+  &--dragging-out
+    border: 5px dashed $color-state-warning
+    background-color: #76CA6680
+    animation: dashed-border 1s linear infinite
+    animation: dashed-background 1s linear infinite
+  &--dragging-over
+    border: 5px dashed $color-brand-secondary4
+
+@keyframes dashed-border
+  0%
+    border-color: $color-brand-primary
+  50%
+    border-color: transparent
+  100%
+    border-color: $color-brand-primary
+
+@keyframes dashed-background
+  0%
+    background-color: #76CA6680
+  50%
+    background-color: transparent
+  100%
+    background-color: #76CA6680

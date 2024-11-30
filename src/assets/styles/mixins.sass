@@ -1,0 +1,82 @@
+@mixin animation($name, $duration, $timing-function, $fill-mode: none, $iteration-count: none)
+  animation-name: $name
+  animation-duration: $duration
+  animation-timing-function: $timing-function
+  @if $fill-mode
+    animation-fill-mode: $fill-mode
+
+  @if $iteration-count
+    animation-iteration-count: $iteration-count
+
+@mixin background($url-image, $position, $repeat, $size)
+  background-image: $url-image
+  background-position: $position
+  background-size: $size
+  background-repeat: $repeat
+
+@mixin font-face($font-family, $url, $weight, $style)
+  @font-face
+    font-family: "#{$font-family}"
+    src: url("../fonts/#{$url}.woff2") format("woff2")
+    font-weight: #{$weight}
+    font-display: swap
+    font-style: $style
+
+@mixin fontSize-lineHeight($font-size, $line-height)
+  font-size: $font-size
+  line-height: $line-height
+
+@mixin transition($properties, $duration, $timing-function)
+  transition-property: $properties
+  transition-duration: $duration
+  transition-timing-function: $timing-function
+
+@mixin position($position, $top, $left, $right, $bottom)
+  position: $position
+  top: $top
+  left: $left
+  right: $right
+  bottom: $bottom
+
+@mixin displayFlex($display, $flex-direction, $flex-wrap, $align-content, $justify-content, $align-items, $gap)
+  display: $display
+  flex-direction: $flex-direction
+  flex-wrap: $flex-wrap
+  align-content: $align-content
+  justify-content: $justify-content
+  align-items: $align-items
+  gap: $gap
+
+/* +infinity - 1201 */
+// (layout 1366 - container 1186 - offset 90)
+@mixin desktop
+  @media (max-width: ($desktop))
+    @content
+
+/* от 1200 до 993 */
+// (layout 1024 - container 984 - offset 20)
+@mixin laptop
+  @media (max-width: ($laptop))
+    @content
+
+/* от 992 до 769 */
+// (layout 768 - container 728 - offset 20)
+@mixin tablet-big
+  @media (max-width: ($tablet-big))
+    @content
+
+/* от 751 до 601 */
+@mixin tablet-small
+  @media (max-width: ($tablet-small))
+    @content
+
+/* от 600 до 481 */
+@mixin tablet-mini
+  @media (max-width: ($tablet-mini))
+    @content
+
+/* от 480 до 320(-infinity) */
+// (layout 320 - container 300 - offset 10)
+@mixin mobile
+  @media (max-width: ($mobile))
+    @content
