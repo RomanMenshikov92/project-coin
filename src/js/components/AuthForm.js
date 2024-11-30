@@ -136,7 +136,7 @@ export default class FormAuth {
         this.authPage.wrapper.classList.remove("wrapper--loading");
       } catch (error) {
         console.error(messages.apiError + ": ", error);
-        errorSpan.textContent = error;
+        errorSpan.textContent = "Ошибка при авторизации. Пожалуйста, попробуйте еще раз.";
         isValid = false;
         this.authPage.loader.remove();
         this.authPage.wrapper.classList.remove("wrapper--loading");
