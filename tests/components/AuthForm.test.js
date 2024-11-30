@@ -199,7 +199,7 @@ describe("FormAuth", () => {
    * Проверяет, что при сетевой ошибке возвращается соответствующее сообщение об ошибке.
    */
   it("Возвращает сетевую ошибку", async () => {
-    const login = "testUser   ";
+    const login = "testUser";
     const password = "testPassword";
 
     postAuthLogin.mockRejectedValueOnce(new Error("Network Error"));
