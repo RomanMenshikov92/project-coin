@@ -31,11 +31,17 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install
 
-      - name: Run Stylelint
-        run: npm run stylelint
+      - name: Run Prettier
+        run: npm run format
 
-      # - name: Run Code
-      #   run: npm run code
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Tests jest
+        run: npm run test:unit
+
+      - name: Run Tests e2e
+        run: npm run test:e2e
 
       - name: Build
         run: npm run build
@@ -46,7 +52,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "app"
+          path: "dist"
 
       - name: Deploy to GitHub Pages
         id: deployment
@@ -54,4 +60,4 @@ jobs:
         with:
           branch: gh-pages
           public: true
-          folder: app
+          folder: dist
