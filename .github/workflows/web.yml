@@ -40,16 +40,16 @@ jobs:
       - name: Start Frontend
         run: |
           npm install
-          npm run dev &
+          npm run dev
 
       - name: Start Backend
         run: |
           cd backend
           npm install
-          npm run start &
+          npm run start
 
-      - name: Wait for Application to be ready
-        run: npx wait-on http://localhost:1111/
+      # - name: Wait for Application to be ready
+      #   run: npx wait-on http://localhost:1111/
 
       - name: Run Tests jest
         run: npm run test:unit
