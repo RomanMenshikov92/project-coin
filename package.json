@@ -7,7 +7,7 @@
   "directories": {
     "doc": "docs"
   },
-  "private": true,
+  "private": false,
   "homepage": "https://RomanMenshikov92.github.io/project-coin/",
   "repository": "https://github.com/RomanMenshikov92/project-coin.git",
   "scripts": {

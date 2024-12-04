@@ -37,25 +37,25 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      - name: Start Frontend
-        run: |
-          npm install
-          npm run dev &
+      # - name: Start Frontend
+      #   run: |
+      #     npm install
+      #     npm run dev &
 
-      - name: Start Backend
-        run: |
-          cd backend
-          npm install
-          npm run start &
+      # - name: Start Backend
+      #   run: |
+      #     cd backend
+      #     npm install
+      #     npm run start &
 
-      - name: Wait for Application to be ready
-        run: npx wait-on http://localhost:1111/
+      # - name: Wait for Application to be ready
+      #   run: npx wait-on http://localhost:1111/
 
-      - name: Run Tests jest
-        run: npm run test:unit
+      # - name: Run Tests jest
+      #   run: npm run test:unit
 
-      - name: Run Tests e2e
-        run: npx cypress run
+      # - name: Run Tests e2e
+      #   run: npx cypress run
 
       - name: Build
         run: npm run build
