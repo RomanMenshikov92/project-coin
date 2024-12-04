@@ -74,4 +74,4 @@ jobs:
         with:
           branch: gh-pages
           public: true
-          folder: dist
+          folder: /
