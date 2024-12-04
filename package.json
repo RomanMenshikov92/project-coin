@@ -8,6 +8,8 @@
     "doc": "docs"
   },
   "private": true,
+  "homepage": "https://RomanMenshikov92.github.io/project-coin/",
+  "repository": "https://github.com/RomanMenshikov92/project-coin.git",
   "scripts": {
     "dev": "webpack serve --mode development",
     "build": "webpack --mode production",
