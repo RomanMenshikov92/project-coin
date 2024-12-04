@@ -49,7 +49,9 @@ jobs:
           npm run start &
 
       - name: Wait for services to be up
-        run: npx wait-on http://localhost:1111/
+        run: |
+          sleep 30
+          npx wait-on http://localhost:1111/project-coin/
 
       - name: Run Tests jest
         run: npm run test:unit
