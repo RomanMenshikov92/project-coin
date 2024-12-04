@@ -61,7 +61,7 @@ jobs:
         run: npm run test:unit
 
       - name: Run Tests e2e
-        run: npx cypress run
+        run: npx cypress run --proxy http://localhost:1111
 
       - name: Build
         run: npm run build
